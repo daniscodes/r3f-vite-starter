@@ -4,10 +4,15 @@ Command: npx gltfjsx@6.2.14 public/models/avatar.glb --keepnames
 */
 
 import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
+import { useAnimations,  useGLTF, useFBX } from "@react-three/drei";
 
 export function Avatar(props) {
   const { nodes, materials } = useGLTF("/models/avatar.glb");
+
+  const { animations: typingAnimation } = useFBX("/animations/Typing.fbx");
+
+  console.log(typingAnimation);
+
   return (
     <group {...props} dispose={null}>
     <primitive object={nodes.Hips} />

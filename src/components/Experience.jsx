@@ -5,8 +5,8 @@ export const Experience = () => {
   return (
     <>
       <OrbitControls />
-      <group>
-        <Avatar frustumCulled={false} />
+      <group position-y={-1}>
+        <Avatar />
       </group>
       <ambientLight intensity={1} />
     </>
