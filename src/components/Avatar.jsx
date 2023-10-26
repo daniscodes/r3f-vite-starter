@@ -10,7 +10,7 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export function Avatar(props) {
-  const {animation} = props;
+  const { animation } = props;
 
   // controls
   const { headFollow, cursorFollow, wireframe } = useControls({
@@ -23,8 +23,12 @@ export function Avatar(props) {
   const { nodes, materials } = useGLTF("/models/avatar.glb");
 
   const { animations: typingAnimation } = useFBX("/animations/Typing.fbx");
-  const { animations: fallingAnimation } = useFBX("/animations/Falling Idle.fbx");
-  const { animations: standingAnimation } = useFBX("/animations/Standing Idle.fbx");
+  const { animations: fallingAnimation } = useFBX(
+    "/animations/Falling Idle.fbx"
+  );
+  const { animations: standingAnimation } = useFBX(
+    "/animations/Standing Idle.fbx"
+  );
 
   // console.log(typingAnimation);
 
