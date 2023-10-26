@@ -12,10 +12,12 @@ import * as THREE from "three";
 export function Avatar(props) {
   const {animation} = props;
 
-  const {headFollow, cursorFollow} = useControls({
+  // controls
+  const { headFollow, cursorFollow, wireframe } = useControls({
     headFollow: false,
-    cursorFollow: false
-  })
+    cursorFollow: false,
+    wireframe: false,
+  });
   const group = useRef();
 
   const { nodes, materials } = useGLTF("/models/avatar.glb");
@@ -53,6 +55,13 @@ export function Avatar(props) {
       group.current.getObjectByName("Spine2").lookAt(target);
     }
   });
+
+  // wireframe effect
+  useEffect(() => {
+    Object.values(materials).forEach((material) => {
+      material.wireframe = wireframe;
+    });
+  }, [wireframe]);
 
   return (
     <group {...props} ref={group} dispose={null}>
