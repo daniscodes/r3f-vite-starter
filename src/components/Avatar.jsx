@@ -10,6 +10,7 @@ import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 export function Avatar(props) {
+  const {animation} = props;
 
   const {headFollow, cursorFollow} = useControls({
     headFollow: false,
@@ -29,12 +30,18 @@ export function Avatar(props) {
   fallingAnimation[0].name = "Falling";
   standingAnimation[0].name = "Standing";
 
-  const { actions } = useAnimations(typingAnimation, group);
+  const { actions } = useAnimations(
+    [typingAnimation[0], standingAnimation[0], fallingAnimation[0]],
+    group
+  );
 
   // Play our action
   useEffect(() => {
-    actions["Typing"].reset().play();
-  }, []);
+    actions[animation].reset().fadeIn(0.5).play();
+    return () => {
+      actions[animation].reset().fadeOut(0.5);
+    };
+  }, [animation]);
 
   // Follow cursor
   useFrame((state) => {
